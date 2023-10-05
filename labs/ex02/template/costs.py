@@ -15,8 +15,7 @@ def compute_loss(y, tx, w):
     Returns:
         the value of the loss (a scalar), corresponding to the input parameters w.
     """
-    # ***************************************************
-    # INSERT YOUR CODE HERE
-    # TODO: compute loss by MSE
-    # ***************************************************
-    raise NotImplementedError
+
+    # Compute MSE loss
+    e = y - tx @ w
+    return 2 / len(y) * e.T @ e

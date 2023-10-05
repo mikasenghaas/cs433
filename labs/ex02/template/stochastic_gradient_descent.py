@@ -5,6 +5,7 @@ Stochastic Gradient Descent
 """
 from helpers import batch_iter
 from costs import compute_loss
+from gradient_descent import compute_gradient
 
 
 def compute_stoch_gradient(y, tx, w):
@@ -23,7 +24,7 @@ def compute_stoch_gradient(y, tx, w):
     # INSERT YOUR CODE HERE
     # TODO: implement stochastic gradient computation. It's the same as the usual gradient.
     # ***************************************************
-    raise NotImplementedError
+    return compute_gradient(y, tx, w)
 
 
 def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
@@ -48,11 +49,14 @@ def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
     w = initial_w
 
     for n_iter in range(max_iters):
-        # ***************************************************
-        # INSERT YOUR CODE HERE
-        # TODO: implement stochastic gradient descent.
-        # ***************************************************
-        raise NotImplementedError
+        for yb, xb in batch_iter(y, tx, batch_size=batch_size):
+            loss = compute_loss(yb, xb, w)
+            grad = compute_stoch_gradient(yb, xb, w)
+
+            w = w - gamma * grad
+
+            losses.append(loss)
+            ws.append(w)
 
         print(
             "SGD iter. {bi}/{ti}: loss={l}, w0={w0}, w1={w1}".format(
