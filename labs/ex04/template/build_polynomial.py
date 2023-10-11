@@ -18,10 +18,10 @@ def build_poly(x, degree):
     array([[1.  , 0.  , 0.  ],
            [1.  , 1.5 , 2.25]])
     """
-    # ***************************************************
-    # COPY YOUR CODE FROM EX03 HERE
-    # polynomial basis function: TODO
-    # this function should return the matrix formed
-    # by applying the polynomial basis to the input data
-    # ***************************************************
-    raise NotImplementedError
+
+    # Create augmented features by iterating over degrees
+    augmented_features = np.hstack(
+        [(x**d).reshape(-1, 1) for d in range(0, degree + 1)]
+    )
+
+    return augmented_features
